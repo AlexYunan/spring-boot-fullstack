@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="93371065-2b3c-40a3-8b5c-b351ac1bf5ec" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="JUnit5 Test Class" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="isToolWindowVisible" value="false" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="MavenRunner">
+    <option name="jreName" value="17" />
+  </component>
+  <component name="ProjectId" id="2OnAiuvSe7CSIFjAQZYDdtrwiZh" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "E:/Users/alex/Desktop/RAMESH-SPRING BOOT/springboot-microservices",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "DockerRegistry",
+    "spring.configuration.checksum": "2861fda76d6e04a8b64803e847b3a3f1",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Users\alex\Desktop\AmigosCodeFullStack\spring-boot-example\src\main\resources\db\migration" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.alexgiounan.springbootexample.customer" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.alexgiounan.springbootexample.customer" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Docker.docker-compose.yml.db: Compose Deployment">
+    <configuration name="CustomerIntegrationTest.canRegisterACustomer" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="alexgiou-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.alexgiounan.springbootexample.journey.CustomerIntegrationTest" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.alexgiounan.springbootexample.journey" />
+      <option name="MAIN_CLASS_NAME" value="com.alexgiounan.springbootexample.journey.CustomerIntegrationTest" />
+      <option name="METHOD_NAME" value="canRegisterACustomer" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CustomerRowMapperTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="spring-boot-example" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.alexgiounan.springbootexample.customer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.alexgiounan.springbootexample.customer" />
+      <option name="MAIN_CLASS_NAME" value="com.alexgiounan.springbootexample.customer.CustomerRowMapperTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CustomerServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="spring-boot-example" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.alexgiounan.springbootexample.customer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.alexgiounan.springbootexample.customer" />
+      <option name="MAIN_CLASS_NAME" value="com.alexgiounan.springbootexample.customer.CustomerServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CustomerServiceTest.willThrowWhenCustomerUpdateHasNoChanges" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="spring-boot-example" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.alexgiounan.springbootexample.customer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.alexgiounan.springbootexample.customer" />
+      <option name="MAIN_CLASS_NAME" value="com.alexgiounan.springbootexample.customer.CustomerServiceTest" />
+      <option name="METHOD_NAME" value="willThrowWhenCustomerUpdateHasNoChanges" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SpringBootExampleApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="alexgiou-api" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.alexgiounan.springbootexample.SpringBootExampleApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.db: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="db" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Docker.docker-compose.yml.db: Compose Deployment" />
+        <item itemvalue="JUnit.CustomerServiceTest.willThrowWhenCustomerUpdateHasNoChanges" />
+        <item itemvalue="JUnit.CustomerServiceTest" />
+        <item itemvalue="JUnit.CustomerRowMapperTest" />
+        <item itemvalue="JUnit.CustomerIntegrationTest.canRegisterACustomer" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="93371065-2b3c-40a3-8b5c-b351ac1bf5ec" name="Changes" comment="" />
+      <created>1682186105378</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1682186105378</updated>
+      <workItem from="1682186107028" duration="4565000" />
+      <workItem from="1682331461517" duration="21000" />
+      <workItem from="1682331502073" duration="955000" />
+      <workItem from="1682332481853" duration="117000" />
+      <workItem from="1682332616622" duration="818000" />
+      <workItem from="1682333451234" duration="10671000" />
+      <workItem from="1682419676484" duration="166000" />
+      <workItem from="1682419859615" duration="18462000" />
+      <workItem from="1682589082030" duration="26433000" />
+      <workItem from="1682941571680" duration="10604000" />
+      <workItem from="1683038008398" duration="2374000" />
+      <workItem from="1683046649817" duration="208000" />
+      <workItem from="1683046872713" duration="4179000" />
+      <workItem from="1683112128162" duration="27000" />
+      <workItem from="1683112171530" duration="1880000" />
+      <workItem from="1683114412405" duration="5231000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/alexgiounan/springbootexample/customer/CustomerRepositoryTest.java</url>
+          <line>29</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/spring_boot_example$CustomerRowMapperTest.ic" NAME="CustomerRowMapperTest Coverage Results" MODIFIED="1682676722089" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.alexgiounan.springbootexample.customer.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/spring_boot_example$CustomerJDBCDataAccessServiceTest.ic" NAME="CustomerJDBCDataAccessServiceTest Coverage Results" MODIFIED="1682606628568" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.alexgiounan.springbootexample.customer.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/spring_boot_example$CustomerServiceTest.ic" NAME="CustomerServiceTest Coverage Results" MODIFIED="1682676045973" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.alexgiounan.springbootexample.customer.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/spring_boot_example$CustomerRepositoryTest.ic" NAME="CustomerRepositoryTest Coverage Results" MODIFIED="1682608678861" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.alexgiounan.springbootexample.customer.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/spring_boot_example$CustomerJPADataAccessServiceTest.ic" NAME="CustomerJPADataAccessServiceTest Coverage Results" MODIFIED="1682619709853" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.alexgiounan.springbootexample.customer.*</FILTER>
+    </SUITE>
+  </component>
+</project>
