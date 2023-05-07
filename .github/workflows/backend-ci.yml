@@ -15,7 +15,7 @@ jobs:
         image: postgres:15.2
         env:
           POSTGRES_USER: alex
-          POSTGRES_PASSWORD: Excellent90@
+          POSTGRES_PASSWORD: password
           POSTGRES_DB: customer
         ports:
           - 5432:5432

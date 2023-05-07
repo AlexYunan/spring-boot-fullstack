@@ -4,7 +4,7 @@ services:
     image: postgres:15.2
     environment:
       POSTGRES_USER: alex
-      POSTGRES_PASSWORD: Excellent90@
+      POSTGRES_PASSWORD: password
       PGDATA: /data/postgres
     volumes:
       - db:/data/postgres
