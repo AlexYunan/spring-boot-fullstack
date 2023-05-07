@@ -98,7 +98,7 @@ jobs:
       - name: Send Slack Message
         run: >
           curl -X POST -H 'Content-type: application/json' 
-          --data '{"text":"Deployment and commit completed :github-check-mark: :party_blob: - http://http://alexgiounan-api-fullstack-env.eba-zw6fttpp.eu-central-1.elasticbeanstalk.com//"}' 
+          --data '{"text":"Deployment and commit completed :github-check-mark: :party_blob: - http://http://alexgiounan-api-fullstack-env.eba-zw6fttpp.eu-central-1.elasticbeanstalk.com/"}' 
           ${{ secrets.SLACK_WEBHOOK_URL }}
       - name: Send Slack Message
         if: always()
