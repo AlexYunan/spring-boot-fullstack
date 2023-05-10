@@ -35,6 +35,7 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
                 .name(FAKER.name().fullName())
                 .email(FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID())
                 .age(20)
+                .gender(Gender.MALE)
                 .build();
 
         underTest.insertCustomer(customer);
@@ -56,6 +57,7 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
                 .name(FAKER.name().fullName())
                 .email(fakerEmail)
                 .age(20)
+                .gender(Gender.MALE)
                 .build();
         underTest.insertCustomer(customer);
 
@@ -101,6 +103,7 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
                 .name(FAKER.name().fullName())
                 .email(fakerEmail)
                 .age(20)
+                .gender(Gender.MALE)
                 .build();
 
         underTest.insertCustomer(customer);
@@ -130,6 +133,7 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
                 .name(FAKER.name().fullName())
                 .email(fakerEmail)
                 .age(20)
+                .gender(Gender.MALE)
                 .build();
 
         underTest.insertCustomer(customer);
@@ -156,6 +160,7 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
                 .name(FAKER.name().fullName())
                 .email(fakerEmail)
                 .age(20)
+                .gender(Gender.MALE)
                 .build();
 
         underTest.insertCustomer(customer);
@@ -182,6 +187,7 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
                 .name(FAKER.name().fullName())
                 .email(fakerEmail)
                 .age(20)
+                .gender(Gender.MALE)
                 .build();
 
         underTest.insertCustomer(customer);
@@ -223,6 +229,7 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
                 .name(FAKER.name().fullName())
                 .email(fakerEmail)
                 .age(20)
+                .gender(Gender.MALE)
                 .build();
 
         underTest.insertCustomer(customer);
@@ -264,6 +271,7 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
                 .name(FAKER.name().fullName())
                 .email(fakerEmail)
                 .age(20)
+                .gender(Gender.MALE)
                 .build();
 
         underTest.insertCustomer(customer);
@@ -294,6 +302,47 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
             assertThat(c.getName()).isEqualTo(customer.getName());
             assertThat(c.getEmail()).isEqualTo(newEmail);
             assertThat(c.getAge()).isEqualTo(customer.getAge());
+        });
+    }
+    @Test
+    void willUpdateAllPropertiesCustomer() {
+        // Given
+        String fakerEmail = FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID();
+        Customer customer = Customer.builder()
+                .name(FAKER.name().fullName())
+                .email(fakerEmail)
+                .age(20)
+                .gender(Gender.MALE)
+                .build();
+
+        underTest.insertCustomer(customer);
+
+        int id = underTest.selectAllCustomers()
+                .stream()
+                .filter(c -> c.getEmail().equals(fakerEmail))
+                .map(Customer::getId)
+                .findFirst()
+                .orElseThrow();
+
+        // When update with new name, age and email
+        Customer update = new Customer();
+        update.setId(id);
+        update.setName("foo");
+        String newEmail = UUID.randomUUID().toString();
+        update.setEmail(newEmail);
+        update.setAge(22);
+
+        underTest.updateCustomer(update);
+
+        // Then
+        Optional<Customer> actual = underTest.selectCustomerById(id);
+
+        assertThat(actual).isPresent().hasValueSatisfying(updated -> {
+            assertThat(updated.getId()).isEqualTo(id);
+            assertThat(updated.getGender()).isEqualTo(Gender.MALE);
+            assertThat(updated.getName()).isEqualTo("foo");
+            assertThat(updated.getEmail()).isEqualTo(newEmail);
+            assertThat(updated.getAge()).isEqualTo(22);
         });
     }
 }

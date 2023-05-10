@@ -39,6 +39,7 @@ public class CustomerService {
                 .name(customerRegistrationRequest.name())
                 .email(customerRegistrationRequest.email())
                 .age(customerRegistrationRequest.age())
+                .gender(customerRegistrationRequest.gender())
                 .build();
 
         customerDao.insertCustomer(customer);

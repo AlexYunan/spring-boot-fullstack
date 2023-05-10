@@ -2,15 +2,14 @@ package com.alexgiounan.springbootexample;
 
 import com.alexgiounan.springbootexample.customer.Customer;
 import com.alexgiounan.springbootexample.customer.CustomerRepository;
+import com.alexgiounan.springbootexample.customer.Gender;
 import com.github.javafaker.Faker;
 import com.github.javafaker.Name;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.Random;
 
 @SpringBootApplication
@@ -28,11 +27,14 @@ public class SpringBootExampleApplication {
 			Name name = faker.name();
 			String firstName = name.firstName();
 			String lastName = name.lastName();
+			int age = random.nextInt(16, 99);
+			Gender gender = age % 2 == 0 ? Gender.MALE : Gender.FEMALE;
 
 			Customer customer = Customer.builder()
 					.name(firstName + " " + lastName)
 					.email(firstName.toLowerCase() + "." + lastName.toLowerCase() + "@gmail.com")
-					.age(random.nextInt(16,99))
+					.age(age)
+					.gender(gender)
 					.build();
 
 			customerRepository.save(customer);

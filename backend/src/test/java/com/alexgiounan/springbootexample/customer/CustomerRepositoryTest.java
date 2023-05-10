@@ -39,6 +39,7 @@ class CustomerRepositoryTest extends AbstractTestcontainers {
                 .name(FAKER.name().fullName())
                 .email(fakerEmail)
                 .age(20)
+                .gender(Gender.MALE)
                 .build();
 
         underTest.save(customer);
@@ -75,6 +76,7 @@ class CustomerRepositoryTest extends AbstractTestcontainers {
                 .name(FAKER.name().fullName())
                 .email(fakerEmail)
                 .age(20)
+                .gender(Gender.MALE)
                 .build();
 
         underTest.save(customer);

@@ -2,10 +2,9 @@ package com.alexgiounan.springbootexample.journey;
 
 import com.alexgiounan.springbootexample.customer.Customer;
 import com.alexgiounan.springbootexample.customer.CustomerRegistrationRequest;
+import com.alexgiounan.springbootexample.customer.Gender;
 import com.github.javafaker.Faker;
 import com.github.javafaker.Name;
-import org.assertj.core.api.Assertions;
-import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,7 +13,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
 
-import java.awt.*;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
@@ -40,8 +38,10 @@ public class CustomerIntegrationTest {
         String email = fakerName.lastName() + "-" + UUID.randomUUID() + "@gmail.com";
         int age = random.nextInt(1, 100);
 
+        Gender gender = age % 2 == 0 ? Gender.MALE : Gender.FEMALE;
+
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
-                name, email, age
+                name, email, age,gender
         );
 
         // send post request
@@ -70,13 +70,14 @@ public class CustomerIntegrationTest {
                 .name(name)
                 .email(email)
                 .age(age)
+                .gender(gender)
                 .build();
 
         assertThat(allCustomers)
                 .usingRecursiveFieldByFieldElementComparatorIgnoringFields("id")
                 .contains(expectedCustomer);
 
-        var id = allCustomers.stream()
+        int id = allCustomers.stream()
                 .filter(customer -> customer.getEmail().equals(email))
                 .map(Customer::getId)
                 .findFirst()
@@ -105,8 +106,10 @@ public class CustomerIntegrationTest {
         String email = fakerName.lastName() + "-" + UUID.randomUUID() + "@gmail.com";
         int age = random.nextInt(1, 100);
 
+        Gender gender = age % 2 == 0 ? Gender.MALE : Gender.FEMALE;
+
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
-                name, email, age
+                name, email, age, gender
         );
 
         // send post request
@@ -132,7 +135,7 @@ public class CustomerIntegrationTest {
                 .getResponseBody();
 
 
-        var id = allCustomers.stream()
+        int id = allCustomers.stream()
                 .filter(customer -> customer.getEmail().equals(email))
                 .map(Customer::getId)
                 .findFirst()
@@ -154,4 +157,5 @@ public class CustomerIntegrationTest {
                 .expectStatus()
                 .isNotFound();
     }
+
 }

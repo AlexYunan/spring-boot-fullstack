@@ -50,6 +50,7 @@ class CustomerServiceTest {
                 .name("Alex")
                 .email("alex@gmail.com")
                 .age(19)
+                .gender(Gender.MALE)
                 .build();
 
         when(customerDao.selectCustomerById(id)).thenReturn(Optional.of(customer));
@@ -82,7 +83,7 @@ class CustomerServiceTest {
         when(customerDao.existsCustomerWithEmail(email)).thenReturn(false);
 
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
-                "Alex", email, 19
+                "Alex", email, 19,Gender.MALE
         );
         // When
         underTest.addCustomer(request);
@@ -110,7 +111,7 @@ class CustomerServiceTest {
         when(customerDao.existsCustomerWithEmail(email)).thenReturn(true);
 
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
-                "Alex", email, 19
+                "Alex", email, 19,Gender.MALE
         );
         // When
         assertThatThrownBy(() -> underTest.addCustomer(request))
@@ -160,6 +161,7 @@ class CustomerServiceTest {
                 .name("Alex")
                 .email("alex@gmail.com")
                 .age(19)
+                .gender(Gender.MALE)
                 .build();
 
         when(customerDao.selectCustomerById(id)).thenReturn(Optional.of(customer));
@@ -192,6 +194,7 @@ class CustomerServiceTest {
                 .name("Alex")
                 .email("alex@gmail.com")
                 .age(19)
+                .gender(Gender.MALE)
                 .build();
 
         when(customerDao.selectCustomerById(id)).thenReturn(Optional.of(customer));
@@ -291,6 +294,7 @@ class CustomerServiceTest {
                 .name("Alex")
                 .email("alex@gmail.com")
                 .age(19)
+
                 .build();
 
         when(customerDao.selectCustomerById(id)).thenReturn(Optional.of(customer));
