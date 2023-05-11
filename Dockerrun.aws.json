@@ -15,7 +15,7 @@
     },
     {
       "name": "alexgiou-api",
-      "image": "alexyun/alexgiou-api:10.05.2023.14.54.24",
+      "image": "alexyun/alexgiou-api:11.05.2023.17.06.45",
       "essential": true,
       "memory": 512,
       "portMappings": [
