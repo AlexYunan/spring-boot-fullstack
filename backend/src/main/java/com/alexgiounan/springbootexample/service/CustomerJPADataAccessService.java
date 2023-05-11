@@ -1,5 +1,8 @@
-package com.alexgiounan.springbootexample.customer;
+package com.alexgiounan.springbootexample.service;
 
+import com.alexgiounan.springbootexample.customer.Customer;
+import com.alexgiounan.springbootexample.dao.CustomerDao;
+import com.alexgiounan.springbootexample.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -9,7 +12,7 @@ import java.util.Optional;
 
 @Repository("jpa")
 @RequiredArgsConstructor
-public class CustomerJPADataAccessService implements CustomerDao{
+public class CustomerJPADataAccessService implements CustomerDao {
 
     private final CustomerRepository customerRepository;
     @Override

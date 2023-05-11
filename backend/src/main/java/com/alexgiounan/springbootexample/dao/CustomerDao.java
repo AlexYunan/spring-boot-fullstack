@@ -1,4 +1,6 @@
-package com.alexgiounan.springbootexample.customer;
+package com.alexgiounan.springbootexample.dao;
+
+import com.alexgiounan.springbootexample.customer.Customer;
 
 import java.util.List;
 import java.util.Optional;

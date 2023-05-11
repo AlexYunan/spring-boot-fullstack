@@ -1,7 +1,7 @@
 package com.alexgiounan.springbootexample;
 
 import com.alexgiounan.springbootexample.customer.Customer;
-import com.alexgiounan.springbootexample.customer.CustomerRepository;
+import com.alexgiounan.springbootexample.repository.CustomerRepository;
 import com.alexgiounan.springbootexample.customer.Gender;
 import com.github.javafaker.Faker;
 import com.github.javafaker.Name;

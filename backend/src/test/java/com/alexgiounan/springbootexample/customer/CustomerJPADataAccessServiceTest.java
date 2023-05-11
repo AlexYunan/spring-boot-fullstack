@@ -1,5 +1,7 @@
 package com.alexgiounan.springbootexample.customer;
 
+import com.alexgiounan.springbootexample.repository.CustomerRepository;
+import com.alexgiounan.springbootexample.service.CustomerJPADataAccessService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

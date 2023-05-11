@@ -1,5 +1,9 @@
-package com.alexgiounan.springbootexample.customer;
+package com.alexgiounan.springbootexample.service;
 
+import com.alexgiounan.springbootexample.customer.Customer;
+import com.alexgiounan.springbootexample.dao.CustomerDao;
+import com.alexgiounan.springbootexample.customer.CustomerRegistrationRequest;
+import com.alexgiounan.springbootexample.customer.CustomerUpdateRequest;
 import com.alexgiounan.springbootexample.exception.DuplicateResourceException;
 import com.alexgiounan.springbootexample.exception.RequestValidationException;
 import com.alexgiounan.springbootexample.exception.ResourceNotFoundException;

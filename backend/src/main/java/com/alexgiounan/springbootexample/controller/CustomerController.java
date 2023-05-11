@@ -1,5 +1,9 @@
-package com.alexgiounan.springbootexample.customer;
+package com.alexgiounan.springbootexample.controller;
 
+import com.alexgiounan.springbootexample.customer.Customer;
+import com.alexgiounan.springbootexample.customer.CustomerRegistrationRequest;
+import com.alexgiounan.springbootexample.customer.CustomerUpdateRequest;
+import com.alexgiounan.springbootexample.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

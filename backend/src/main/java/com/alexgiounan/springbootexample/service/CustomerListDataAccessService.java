@@ -1,5 +1,8 @@
-package com.alexgiounan.springbootexample.customer;
+package com.alexgiounan.springbootexample.service;
 
+import com.alexgiounan.springbootexample.customer.Customer;
+import com.alexgiounan.springbootexample.dao.CustomerDao;
+import com.alexgiounan.springbootexample.customer.Gender;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -8,7 +11,7 @@ import java.util.Optional;
 
 
 @Repository("list")
-public class CustomerListDataAccessService implements CustomerDao{
+public class CustomerListDataAccessService implements CustomerDao {
 
     //db
     private static final List<Customer> customers;

@@ -11,6 +11,9 @@
 	<groupId>com.alexgiounan</groupId>
 	<artifactId>alexgiou-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<organization>
+		<name>alexyun</name>
+	</organization>
 	<name>spring-boot-example</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
@@ -174,7 +177,7 @@
 						</platforms>
 					</from>
 					<to>
-						<image>docker.io/${docker.username}/${docker.image.name}:${docker.image.tag}</image>
+						<image>docker.io/${docker.username}/${project.artifactId}:${project.version}</image>
 						<tags>
 							<tag>latest</tag>
 						</tags>

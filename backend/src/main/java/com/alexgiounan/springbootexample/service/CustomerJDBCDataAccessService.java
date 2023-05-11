@@ -1,8 +1,10 @@
-package com.alexgiounan.springbootexample.customer;
+package com.alexgiounan.springbootexample.service;
 
+import com.alexgiounan.springbootexample.customer.Customer;
+import com.alexgiounan.springbootexample.dao.CustomerDao;
+import com.alexgiounan.springbootexample.customer.CustomerRowMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
