@@ -1,6 +1,7 @@
 package com.alexgiounan.springbootexample.customer;
 
 import com.alexgiounan.springbootexample.AbstractTestcontainers;
+import com.alexgiounan.springbootexample.TestConfig;
 import com.alexgiounan.springbootexample.repository.CustomerRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Import;
 
 import java.util.UUID;
 
@@ -15,6 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Import({TestConfig.class})
 class CustomerRepositoryTest extends AbstractTestcontainers {
 
     @Autowired
@@ -32,20 +35,21 @@ class CustomerRepositoryTest extends AbstractTestcontainers {
     @Test
     void existsCustomerByEmail() {
         // Given
-        String fakerEmail = FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID();
+        String email = FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID();
 
-        Customer customer = Customer.builder()
-                .name(FAKER.name().fullName())
-                .email(fakerEmail)
-                .age(20)
-                .gender(Gender.MALE)
-                .build();
+        Customer customer = new Customer(
+                FAKER.name().fullName(),
+                email,
+                "password",
+                20,
+                Gender.MALE);
+
 
         underTest.save(customer);
 
         // When
 
-        var actual = underTest.existsCustomerByEmail(fakerEmail);
+        var actual = underTest.existsCustomerByEmail(email);
 
         // Then
 
@@ -69,20 +73,21 @@ class CustomerRepositoryTest extends AbstractTestcontainers {
     @Test
     void existsCustomerById() {
         // Given
-        String fakerEmail = FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID();
+        String email = FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID();
 
-        Customer customer = Customer.builder()
-                .name(FAKER.name().fullName())
-                .email(fakerEmail)
-                .age(20)
-                .gender(Gender.MALE)
-                .build();
+        Customer customer = new Customer(
+                FAKER.name().fullName(),
+                email,
+                "password",
+                20,
+                Gender.MALE);
+
 
         underTest.save(customer);
 
         Integer id = underTest.findAll()
                 .stream()
-                .filter(c -> c.getEmail().equals(fakerEmail))
+                .filter(c -> c.getEmail().equals(email))
                 .map(Customer::getId)
                 .findFirst()
                 .orElseThrow();

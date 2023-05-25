@@ -17,24 +17,25 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
 
     private final CustomerRowMapper customerRowMapper = new CustomerRowMapper();
 
-
+    private Customer customer;
     @BeforeEach
     void setUp() {
         underTest = new CustomerJDBCDataAccessService(
                 getJdbcTemplate(),
                 customerRowMapper
         );
+
+
+        customer = new Customer(
+                FAKER.name().fullName(),
+                FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID(),
+                "password", 20,
+                Gender.MALE);
     }
 
     @Test
     void selectAllCustomers() {
         // Given
-        Customer customer = Customer.builder()
-                .name(FAKER.name().fullName())
-                .email(FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID())
-                .age(20)
-                .gender(Gender.MALE)
-                .build();
 
         underTest.insertCustomer(customer);
         // When
@@ -49,19 +50,19 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
     @Test
     void selectCustomerById() {
         // Given
-        String fakerEmail = FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID();
+        String email = FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID();
+        Customer customer = new Customer(
+                FAKER.name().fullName(),
+                email,
+                "password", 20,
+                Gender.MALE);
 
-        Customer customer = Customer.builder()
-                .name(FAKER.name().fullName())
-                .email(fakerEmail)
-                .age(20)
-                .gender(Gender.MALE)
-                .build();
+
         underTest.insertCustomer(customer);
 
         Integer id = underTest.selectAllCustomers()
                 .stream()
-                .filter(c -> c.getEmail().equals(fakerEmail))
+                .filter(c -> c.getEmail().equals(email))
                 .map(Customer::getId)
                 .findFirst()
                 .orElseThrow();
@@ -95,19 +96,18 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
     @Test
     void existsCustomerWithEmail() {
         // Given
-        String fakerEmail = FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID();
-
-        Customer customer = Customer.builder()
-                .name(FAKER.name().fullName())
-                .email(fakerEmail)
-                .age(20)
-                .gender(Gender.MALE)
-                .build();
+        String email = FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID();
+        String name = FAKER.name().fullName();
+        Customer customer = new Customer(
+                name,
+                email,
+                "password", 20,
+                Gender.MALE);
 
         underTest.insertCustomer(customer);
         // When
 
-        boolean actual = underTest.existsCustomerWithEmail(fakerEmail);
+        boolean actual = underTest.existsCustomerWithEmail(email);
         // Then
         assertThat(actual).isTrue();
     }
@@ -125,19 +125,17 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
     @Test
     void deleteCustomerById() {
         // Given
-        String fakerEmail = FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID();
-
-        Customer customer = Customer.builder()
-                .name(FAKER.name().fullName())
-                .email(fakerEmail)
-                .age(20)
-                .gender(Gender.MALE)
-                .build();
+        String email = FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID();
+        Customer customer = new Customer(
+                FAKER.name().fullName(),
+                email,
+                "password", 20,
+                Gender.MALE);
 
         underTest.insertCustomer(customer);
         Integer id = underTest.selectAllCustomers()
                 .stream()
-                .filter(c -> c.getEmail().equals(fakerEmail))
+                .filter(c -> c.getEmail().equals(email))
                 .map(Customer::getId)
                 .findFirst()
                 .orElseThrow();
@@ -152,20 +150,18 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
     @Test
     void existsPersonWithId() {
         // Given
-        String fakerEmail = FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID();
-
-        Customer customer = Customer.builder()
-                .name(FAKER.name().fullName())
-                .email(fakerEmail)
-                .age(20)
-                .gender(Gender.MALE)
-                .build();
+        String email = FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID();
+        Customer customer = new Customer(
+                FAKER.name().fullName(),
+                email,
+                "password", 20,
+                Gender.MALE);
 
         underTest.insertCustomer(customer);
 
         Integer id = underTest.selectAllCustomers()
                 .stream()
-                .filter(c -> c.getEmail().equals(fakerEmail))
+                .filter(c -> c.getEmail().equals(email))
                 .map(Customer::getId)
                 .findFirst()
                 .orElseThrow();
@@ -179,20 +175,18 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
     @Test
     void updateCustomerName() {
         // Given
-        String fakerEmail = FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID();
-
-        Customer customer = Customer.builder()
-                .name(FAKER.name().fullName())
-                .email(fakerEmail)
-                .age(20)
-                .gender(Gender.MALE)
-                .build();
+        String email = FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID();
+        Customer customer = new Customer(
+                FAKER.name().fullName(),
+                email,
+                "password", 20,
+                Gender.MALE);
 
         underTest.insertCustomer(customer);
 
         Integer id = underTest.selectAllCustomers()
                 .stream()
-                .filter(c -> c.getEmail().equals(fakerEmail))
+                .filter(c -> c.getEmail().equals(email))
                 .map(Customer::getId)
                 .findFirst()
                 .orElseThrow();
@@ -221,20 +215,18 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
     @Test
     void updateCustomerAge() {
         // Given
-        String fakerEmail = FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID();
-
-        Customer customer = Customer.builder()
-                .name(FAKER.name().fullName())
-                .email(fakerEmail)
-                .age(20)
-                .gender(Gender.MALE)
-                .build();
+        String email = FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID();
+        Customer customer = new Customer(
+                FAKER.name().fullName(),
+                email,
+                "password", 20,
+                Gender.MALE);
 
         underTest.insertCustomer(customer);
 
         Integer id = underTest.selectAllCustomers()
                 .stream()
-                .filter(c -> c.getEmail().equals(fakerEmail))
+                .filter(c -> c.getEmail().equals(email))
                 .map(Customer::getId)
                 .findFirst()
                 .orElseThrow();
@@ -263,20 +255,18 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
     @Test
     void updateCustomerEmail() {
         // Given
-        String fakerEmail = FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID();
-
-        Customer customer = Customer.builder()
-                .name(FAKER.name().fullName())
-                .email(fakerEmail)
-                .age(20)
-                .gender(Gender.MALE)
-                .build();
+        String email = FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID();
+        Customer customer = new Customer(
+                FAKER.name().fullName(),
+                email,
+                "password", 20,
+                Gender.MALE);
 
         underTest.insertCustomer(customer);
 
         Integer id = underTest.selectAllCustomers()
                 .stream()
-                .filter(c -> c.getEmail().equals(fakerEmail))
+                .filter(c -> c.getEmail().equals(email))
                 .map(Customer::getId)
                 .findFirst()
                 .orElseThrow();
@@ -305,19 +295,18 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
     @Test
     void willUpdateAllPropertiesCustomer() {
         // Given
-        String fakerEmail = FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID();
-        Customer customer = Customer.builder()
-                .name(FAKER.name().fullName())
-                .email(fakerEmail)
-                .age(20)
-                .gender(Gender.MALE)
-                .build();
+        String email = FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID();
+        Customer customer = new Customer(
+                FAKER.name().fullName(),
+                email,
+                "password", 20,
+                Gender.MALE);
 
         underTest.insertCustomer(customer);
 
         int id = underTest.selectAllCustomers()
                 .stream()
-                .filter(c -> c.getEmail().equals(fakerEmail))
+                .filter(c -> c.getEmail().equals(email))
                 .map(Customer::getId)
                 .findFirst()
                 .orElseThrow();

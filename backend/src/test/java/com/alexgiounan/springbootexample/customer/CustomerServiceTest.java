@@ -1,6 +1,8 @@
 package com.alexgiounan.springbootexample.customer;
 
 import com.alexgiounan.springbootexample.dao.CustomerDao;
+import com.alexgiounan.springbootexample.dto.CustomerDTO;
+import com.alexgiounan.springbootexample.dto.CustomerDTOMapper;
 import com.alexgiounan.springbootexample.exception.DuplicateResourceException;
 import com.alexgiounan.springbootexample.exception.RequestValidationException;
 import com.alexgiounan.springbootexample.exception.ResourceNotFoundException;
@@ -11,6 +13,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
 
@@ -26,9 +29,14 @@ class CustomerServiceTest {
     @Mock
     private CustomerDao customerDao;
 
+    @Mock
+    private PasswordEncoder passwordEncoder;
+
+    private final CustomerDTOMapper customerDTOMapper = new CustomerDTOMapper();
+
     @BeforeEach
     void setUp() {
-        underTest = new CustomerService(customerDao);
+        underTest = new CustomerService(customerDao, passwordEncoder, customerDTOMapper);
     }
 
 
@@ -44,20 +52,16 @@ class CustomerServiceTest {
     void canGetCustomer() {
         // Given
         int id = 10;
-        Customer customer = Customer.builder()
-                .id(id)
-                .name("Alex")
-                .email("alex@gmail.com")
-                .age(19)
-                .gender(Gender.MALE)
-                .build();
+        Customer customer = new Customer(id, "Alex", "alex@gmail.com", "password", 19, Gender.MALE);
 
         when(customerDao.selectCustomerById(id)).thenReturn(Optional.of(customer));
+
+        CustomerDTO expected = customerDTOMapper.apply(customer);
         // When
 
-        Customer actual = underTest.getCustomer(10);
+        CustomerDTO actual = underTest.getCustomer(10);
         // Then
-        assertThat(actual).isEqualTo(customer);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
@@ -82,8 +86,12 @@ class CustomerServiceTest {
         when(customerDao.existsCustomerWithEmail(email)).thenReturn(false);
 
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
-                "Alex", email, 19,Gender.MALE
+                "Alex", email, "password",19,Gender.MALE
         );
+
+        String passwordHash = "123456789abcd";
+
+        when(passwordEncoder.encode(request.password())).thenReturn(passwordHash);
         // When
         underTest.addCustomer(request);
 
@@ -99,6 +107,7 @@ class CustomerServiceTest {
         assertThat(capturedCustomer.getName()).isEqualTo(request.name());
         assertThat(capturedCustomer.getEmail()).isEqualTo(request.email());
         assertThat(capturedCustomer.getAge()).isEqualTo(request.age());
+        assertThat(capturedCustomer.getPassword()).isEqualTo(passwordHash);
 
     }
 
@@ -110,7 +119,7 @@ class CustomerServiceTest {
         when(customerDao.existsCustomerWithEmail(email)).thenReturn(true);
 
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
-                "Alex", email, 19,Gender.MALE
+                "Alex", email, "password",19,Gender.MALE
         );
         // When
         assertThatThrownBy(() -> underTest.addCustomer(request))
@@ -155,13 +164,7 @@ class CustomerServiceTest {
     void canUpdateAllCustomersProperties() {
         // Given
         int id = 10;
-        Customer customer = Customer.builder()
-                .id(id)
-                .name("Alex")
-                .email("alex@gmail.com")
-                .age(19)
-                .gender(Gender.MALE)
-                .build();
+        Customer customer = new Customer(id, "Alex", "alex@gmail.com", "password", 19, Gender.MALE);
 
         when(customerDao.selectCustomerById(id)).thenReturn(Optional.of(customer));
         String newEmail = "alexandros@gmail.com";
@@ -188,13 +191,7 @@ class CustomerServiceTest {
     void canUpdateOnlyCustomerName() {
         // Given
         int id = 10;
-        Customer customer = Customer.builder()
-                .id(id)
-                .name("Alex")
-                .email("alex@gmail.com")
-                .age(19)
-                .gender(Gender.MALE)
-                .build();
+        Customer customer = new Customer(id, "Alex", "alex@gmail.com", "password", 19, Gender.MALE);
 
         when(customerDao.selectCustomerById(id)).thenReturn(Optional.of(customer));
         String newEmail = "alexandros@gmail.com";
@@ -221,12 +218,7 @@ class CustomerServiceTest {
     void canUpdateOnlyCustomerEmail() {
         // Given
         int id = 10;
-        Customer customer = Customer.builder()
-                .id(id)
-                .name("Alex")
-                .email("alex@gmail.com")
-                .age(19)
-                .build();
+        Customer customer = new Customer(id, "Alex", "alex@gmail.com", "password", 19, Gender.MALE);
 
         when(customerDao.selectCustomerById(id)).thenReturn(Optional.of(customer));
         String newEmail = "alexandros@gmail.com";
@@ -255,12 +247,7 @@ class CustomerServiceTest {
     void canUpdateOnlyCustomerAge() {
         // Given
         int id = 10;
-        Customer customer = Customer.builder()
-                .id(id)
-                .name("Alex")
-                .email("alex@gmail.com")
-                .age(19)
-                .build();
+        Customer customer = new Customer(id, "Alex", "alex@gmail.com", "password", 19, Gender.MALE);
 
         when(customerDao.selectCustomerById(id)).thenReturn(Optional.of(customer));
         String newEmail = "alexandros@gmail.com";
@@ -288,13 +275,7 @@ class CustomerServiceTest {
     void willThrowWhenTryingToUpdateCustomerEmailWhenAlreadyTaken() {
         // Given
         int id = 10;
-        Customer customer = Customer.builder()
-                .id(id)
-                .name("Alex")
-                .email("alex@gmail.com")
-                .age(19)
-
-                .build();
+        Customer customer = new Customer(id, "Alex", "alex@gmail.com", "password", 19, Gender.MALE);
 
         when(customerDao.selectCustomerById(id)).thenReturn(Optional.of(customer));
         String newEmail = "alexandros@gmail.com";
@@ -318,12 +299,7 @@ class CustomerServiceTest {
     void willThrowWhenCustomerUpdateHasNoChanges() {
         // Given
         int id = 10;
-        Customer customer = Customer.builder()
-                .id(id)
-                .name("Alex")
-                .email("alex@gmail.com")
-                .age(19)
-                .build();
+        Customer customer = new Customer(id, "Alex", "alex@gmail.com", "password", 19, Gender.MALE);
 
         when(customerDao.selectCustomerById(id)).thenReturn(Optional.of(customer));
 

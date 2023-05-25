@@ -4,28 +4,43 @@ import com.alexgiounan.springbootexample.customer.Customer;
 import com.alexgiounan.springbootexample.dao.CustomerDao;
 import com.alexgiounan.springbootexample.customer.CustomerRegistrationRequest;
 import com.alexgiounan.springbootexample.customer.CustomerUpdateRequest;
+import com.alexgiounan.springbootexample.dto.CustomerDTO;
+import com.alexgiounan.springbootexample.dto.CustomerDTOMapper;
 import com.alexgiounan.springbootexample.exception.DuplicateResourceException;
 import com.alexgiounan.springbootexample.exception.RequestValidationException;
 import com.alexgiounan.springbootexample.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class CustomerService {
 
     private final CustomerDao customerDao;
 
-    public CustomerService(@Qualifier("jpa")CustomerDao customerDao) {
+    private final PasswordEncoder passwordEncoder;
+
+    private final CustomerDTOMapper customerDTOMapper;
+
+    public CustomerService(@Qualifier("jpa")CustomerDao customerDao, PasswordEncoder passwordEncoder, CustomerDTOMapper customerDTOMapper) {
         this.customerDao = customerDao;
+        this.passwordEncoder = passwordEncoder;
+        this.customerDTOMapper = customerDTOMapper;
     }
 
-    public List<Customer> getAllCustomers(){
-        return customerDao.selectAllCustomers();
+    public List<CustomerDTO> getAllCustomers(){
+        return customerDao.selectAllCustomers()
+                .stream()
+                .map(customerDTOMapper)
+                .collect(Collectors.toList());
     }
 
-    public Customer getCustomer(Integer id){
+    public CustomerDTO getCustomer(Integer id){
         return customerDao.selectCustomerById(id)
+                .map(customerDTOMapper)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "customer with id [%s] not found".formatted(id)));
     }
@@ -39,12 +54,13 @@ public class CustomerService {
             );
         }
         // add
-        Customer customer = Customer.builder()
-                .name(customerRegistrationRequest.name())
-                .email(customerRegistrationRequest.email())
-                .age(customerRegistrationRequest.age())
-                .gender(customerRegistrationRequest.gender())
-                .build();
+        Customer customer = new Customer(
+                customerRegistrationRequest.name(),
+                customerRegistrationRequest.email(),
+                passwordEncoder.encode(customerRegistrationRequest.password()),
+                customerRegistrationRequest.age(),
+                customerRegistrationRequest.gender()
+        );
 
         customerDao.insertCustomer(customer);
     }
@@ -61,7 +77,10 @@ public class CustomerService {
 
 
     public void updateCustomer(Integer customerId, CustomerUpdateRequest updateRequest) {
-        Customer customer = getCustomer(customerId);
+
+        Customer customer = customerDao.selectCustomerById(customerId)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "customer with id [%s] not found".formatted(customerId)));
 
         boolean changes = false;
 
