@@ -21,6 +21,7 @@ class CustomerRowMapperTest {
         when(resultSet.getInt("age")).thenReturn(19);
         when(resultSet.getString("name")).thenReturn("Alex");
         when(resultSet.getString("email")).thenReturn("alex@gmail.com");
+        when(resultSet.getString("password")).thenReturn("password");
         when(resultSet.getString("gender")).thenReturn("MALE");
 
         // When

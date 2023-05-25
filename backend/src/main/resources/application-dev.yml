@@ -1,0 +1,38 @@
+server:
+  port: 8080
+  error:
+    include-message: always
+
+cors:
+  allowed-origins: "*"
+  allowed-methods: "*"
+  allowed-headers: "*"
+  exposed-headers: "*"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,info"
+
+logging:
+  level:
+    org:
+      springframework:
+        security: TRACE
+
+spring:
+  datasource:
+    url: jdbc:postgresql://awseb-e-6jmpcvfwgr-stack-awsebrdsdatabase-rm3j0rslgl7j.ceiihwdckavi.eu-central-1.rds.amazonaws.com:5432/ebdb
+    username: alex
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+main:
+  web-application-type: servlet
